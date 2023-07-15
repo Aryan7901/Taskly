@@ -45,14 +45,14 @@ impl Conditions<'_> {
     ) -> Conditions<'a> {
         let (flag_arg, input) = match (arg2, arg3) {
             (Some(arg2), Some(arg3)) => {
-                if arg2.starts_with("-") {
+                if arg2.starts_with('-') {
                     (Some(arg2), Some(arg3))
                 } else {
                     (Some(arg3), Some(arg2))
                 }
             }
             (Some(arg2), None) => {
-                if arg2.starts_with("-") {
+                if arg2.starts_with('-') {
                     (Some(arg2), arg3)
                 } else {
                     (arg3, Some(arg2))
@@ -178,8 +178,14 @@ impl Conditions<'_> {
             }
             _ => {
                 println!("{}", HELP_TEXT);
-                return Ok(());
+                Ok(())
             }
         }
     }
+}
+
+impl Default for Conditions<'_> {
+         fn default() -> Self {
+             Self::new()
+         }
 }
