@@ -3,6 +3,7 @@ use std::iter::Iterator;
 use std::process;
 use taskly::Conditions;
 fn main() {
+    let _ = enable_ansi_support::enable_ansi_support();
     let args: Vec<String> = args().skip(1).collect();
     run(args);
 }
