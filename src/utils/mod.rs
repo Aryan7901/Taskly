@@ -53,11 +53,7 @@ pub fn get_db_conn() -> Result<Connection, Box<dyn Error>> {
             process::exit(1);
         }
     };
-
-    // Define the name of the directory you want to create
     let directory_name = ".todo";
-
-    // Create the full path to the new directory
     let directory_path = home_dir.join(directory_name);
     fs::create_dir_all(&directory_path)?;
     let db_path = directory_path.join("todo.db");
