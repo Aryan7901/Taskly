@@ -1,5 +1,5 @@
 # taskly
-A Todo CLI app made in rust to keep track of all your tasks.
+A Todo CLI app made in Rust to keep track of all your tasks.
 
 # Usage
 
