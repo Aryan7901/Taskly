@@ -185,7 +185,7 @@ impl Conditions<'_> {
 }
 
 impl Default for Conditions<'_> {
-         fn default() -> Self {
-             Self::new()
-         }
+    fn default() -> Self {
+        Self::new()
+    }
 }

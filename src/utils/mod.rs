@@ -1,4 +1,9 @@
-use std::{error::Error, fmt::Display, path::Path, process};
+use std::{
+    error::Error,
+    fmt::Display,
+    fs::{self},
+    process,
+};
 
 use colorized::{colorize_println, Colors};
 use rusqlite::Connection;
@@ -32,6 +37,7 @@ impl Display for Todo {
         ))
     }
 }
+
 pub fn unwrap_arg_or_quit<'a>(val: &'a Option<&'a str>) -> &'a str {
     val.unwrap_or_else(|| {
         colorize_println("Insufficient Arguments Provided!", Colors::RedFg);
@@ -40,7 +46,21 @@ pub fn unwrap_arg_or_quit<'a>(val: &'a Option<&'a str>) -> &'a str {
     })
 }
 pub fn get_db_conn() -> Result<Connection, Box<dyn Error>> {
-    let db_path = Path::new("./todo.db3");
+    let home_dir = match dirs::home_dir() {
+        Some(path) => path,
+        None => {
+            eprintln!("Failed to get home directory");
+            process::exit(1);
+        }
+    };
+
+    // Define the name of the directory you want to create
+    let directory_name = ".todo";
+
+    // Create the full path to the new directory
+    let directory_path = home_dir.join(directory_name);
+    fs::create_dir_all(&directory_path)?;
+    let db_path = directory_path.join("todo.db");
     let conn = Connection::open(db_path)?;
     conn.execute(
         "CREATE TABLE IF NOT EXISTS todo (
