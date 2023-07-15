@@ -2,6 +2,11 @@
 name = "taskly"
 version = "0.1.0"
 edition = "2021"
+authors= ["Aryan Shetty"]
+description= "A Todo app made in rust to keep track of all your tasks."
+readme = "README.md"
+repository = "https://github.com/Aryan7901/Taskly"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
