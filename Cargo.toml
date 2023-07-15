@@ -1,6 +1,6 @@
 [package]
 name = "taskly"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors= ["Aryan Shetty"]
 description= "A Todo app made in rust to keep track of all your tasks."
@@ -11,7 +11,7 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-colorized = "1.0.0"
+owo-colors = "3"
 rusqlite = { version = "0.29.0", features = ["bundled"] }
 dirs = "5.0"
 

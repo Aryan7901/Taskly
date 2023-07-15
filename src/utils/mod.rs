@@ -5,7 +5,7 @@ use std::{
     process,
 };
 
-use colorized::{colorize_println, Colors};
+use owo_colors::OwoColorize;
 use rusqlite::Connection;
 pub enum FlagArgs {
     CompletedOnly,
@@ -40,7 +40,7 @@ impl Display for Todo {
 
 pub fn unwrap_arg_or_quit<'a>(val: &'a Option<&'a str>) -> &'a str {
     val.unwrap_or_else(|| {
-        colorize_println("Insufficient Arguments Provided!", Colors::RedFg);
+        println!("{}", "Insufficient Arguments Provided!".bright_red());
         println!("Run todo help for information on commands");
         process::exit(1)
     })

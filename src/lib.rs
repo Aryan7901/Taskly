@@ -2,7 +2,7 @@ pub mod utils;
 
 use std::{error::Error, io};
 
-use colorized::{colorize_println, Colors};
+use owo_colors::OwoColorize;
 use rusqlite::params;
 use utils::{FlagArgs, NonFlagArgs, Todo};
 
@@ -118,7 +118,7 @@ impl Conditions<'_> {
                 non_flag: NonFlagArgs::Edit(value),
             } => {
                 let todo = unwrap_arg_or_quit(value);
-                colorize_println("Enter new name for this todo", Colors::BrightMagentaFg);
+                println!("{}", "Enter new name for this todo".magenta());
                 let mut user_input = String::new();
                 let stdin = io::stdin(); // We get `Stdin` here.
                 stdin.read_line(&mut user_input)?;
@@ -152,9 +152,9 @@ impl Conditions<'_> {
                 non_flag: NonFlagArgs::List,
             } => {
                 let (status, query_extra_params) = match flag {
-                    FlagArgs::All => ("", ""),
-                    FlagArgs::CompletedOnly => ("Completed", " WHERE status='COMPLETED'"),
-                    FlagArgs::UncompletedOnly => ("Pending", " WHERE status='TODO'"),
+                    FlagArgs::All => (" ", ""),
+                    FlagArgs::CompletedOnly => (" Completed ", " WHERE status='COMPLETED'"),
+                    FlagArgs::UncompletedOnly => (" Pending ", " WHERE status='TODO'"),
                 };
                 let query = String::from("SELECT id,name,status FROM todo") + query_extra_params;
                 let mut stmt = conn.prepare(&query)?;
@@ -165,11 +165,11 @@ impl Conditions<'_> {
                         status: row.get(2)?,
                     })
                 })?;
-                let title = String::from("Here are all the ") + status + " todos";
-                colorize_println(title, Colors::BrightGreenFg);
-                colorize_println(
-                    format!("{0: <5}  {1: <20}  {2: <9}", "ID", "NAME", "STATUS"),
-                    Colors::BrightBlueFg,
+                let title = String::from("Here are all the") + status + "todos";
+                println!("{}", title.bright_green());
+                println!(
+                    "{}",
+                    format!("{0: <5}  {1: <20}  {2: <9}", "ID", "NAME", "STATUS").bright_blue()
                 );
                 for todo in todo_iter {
                     println!("{}", todo?);
