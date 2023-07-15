@@ -4,7 +4,8 @@ A Todo CLI app made in Rust to keep track of all your tasks.
 # Installation
 
 You can use the below command to download taskly if you have cargo installed
-```cargo install taskly
+```
+cargo install taskly
 ```
 
 # Usage
