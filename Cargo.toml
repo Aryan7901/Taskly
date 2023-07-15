@@ -1,6 +1,6 @@
 [package]
 name = "taskly"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors= ["Aryan Shetty"]
 description= "A Todo app made in rust to keep track of all your tasks."
